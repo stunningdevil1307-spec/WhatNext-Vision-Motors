@@ -1,1 +1,34 @@
+<template>
+    <lightning-card title="Vehicle Showroom">
+        <template if:true={vehicles}>
+            <div class="slds-grid slds-wrap">
+                <template for:each={vehicles} for:item="vehicle">
+                    <div key={vehicle.Id} class="slds-col slds-size_1-of-3">
+                        <div class="card">
+                            <h2>{vehicle.Name}</h2>
+                            <p>Model: {vehicle.Model__c}</p>
+                            <p>Price: ₹{vehicle.Price__c}</p>
+                            <p>
+                                Stock: 
+                                <span class={vehicle.stockClass}>
+                                    {vehicle.Stock__c}
+                                </span>
+                            </p>
 
+                            <lightning-button 
+                                label="Order Now" 
+                                variant="brand"
+                                onclick={handleOrder}
+                                data-id={vehicle.Id}>
+                            </lightning-button>
+                        </div>
+                    </div>
+                </template>
+            </div>
+        </template>
+
+        <template if:false={vehicles}>
+            <p>No Vehicles Available</p>
+        </template>
+    </lightning-card>
+</template>
